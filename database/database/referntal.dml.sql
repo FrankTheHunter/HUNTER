@@ -1,5 +1,5 @@
 DELETE FROM FEDERATION;
-insert into FEDERATION(license_number,firstname,lastname) VALUES 
+INSERT INTO FEDERATION(license_number,firstname,lastname) VALUES 
 	('201004480286-04-B','RIZZARDI','FRANK'),
 	('202404480287-04-B','MARSHALL','FRANK'),
 	('202404480288-04-B','ARRU','HUGO'),
