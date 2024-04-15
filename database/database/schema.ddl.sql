@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS hunters, hunters_registered, events;
+DROP TABLE IF EXISTS FEDERATION, hunters_registered, events;
 
 CREATE TABLE federation (
    license_number VARCHAR(17),
@@ -23,6 +23,7 @@ CREATE TABLE events (
    end_date DATE NOT NULL,
    longitude DECIMAL(10, 8) NOT NULL,
    latitude DECIMAL(10, 8) NOT NULL,
+   
    registered_id INT NOT NULL,
    CONSTRAINT events_pk PRIMARY KEY(id),
    CONSTRAINT events_fk FOREIGN KEY(registered_id) REFERENCES hunters_registered(id),
