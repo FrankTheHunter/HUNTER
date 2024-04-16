@@ -1,6 +1,6 @@
 import { Module, Global } from '@nestjs/common';
 import { Kysely, PostgresDialect } from 'kysely';
-import { Pool } from 'pg'
+import { Pool } from 'pg';
 
 const DATABASE_PROVIDERS = [
   {
@@ -13,7 +13,7 @@ const DATABASE_PROVIDERS = [
             database: 'hunters',
             user: 'hunter',
             password: 'super',
-          })
+          }),
         }),
       });
       return db;
