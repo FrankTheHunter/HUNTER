@@ -1,158 +1,78 @@
 <script lang="ts">
-    let nom = '';
-    let prénom = '';
-    let email = '';
-    let motdepasse = '';
-    let emailConnexion = '';
-    let numéropermisdechasser = '';
-    let motdepasseConnexion = '';
+  let firstName = '';
+  let lastName = '';
+  let email = '';
+  let password = '';
+  let loginEmail = '';
+  let huntingLicenseNumber = '';
+  let loginPassword = '';
+  async function signUp(event?: Event) {
+      if (event) {
+          event.preventDefault();
+      }
+      const firstNameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]{2,}$/;
+      const lastNameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]{2,}$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const huntingLicenseNumberRegex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+      const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
-    async function inscription(event?: Event) {
-        if (event) {
-            event.preventDefault();
-        }
+      if (!firstName.match(firstNameRegex)) {
+          alert("Invalid first name");
+          return;
+      }
 
-        // Validation des données avec des regex
-        const nomRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]{2,}$/;
-        const prénomRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]{2,}$/;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const numéropermisdechasserRegex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
-        const motdepasseRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+      if (!lastName.match(lastNameRegex)) {
+          alert("Invalid last name");
+          return;
+      }
 
-        if (!nom.match(nomRegex)) {
-            alert("Nom invalide");
-            return;
-        }
+      if (!email.match(emailRegex)) {
+          alert("Invalid email");
+          return;
+      }
 
-        if (!prénom.match(prénomRegex)) {
-            alert("Prénom invalide");
-            return;
-        }
+      if (!huntingLicenseNumber.match(huntingLicenseNumberRegex)) {
+          alert("Invalid hunting license number");
+          return;
+      }
 
-        if (!email.match(emailRegex)) {
-            alert("Email invalide");
-            return;
-        }
+      if (!password.match(passwordRegex)) {
+          alert("Invalid password. It must contain at least 8 characters, one uppercase letter, one lowercase letter, and one digit.");
+          return;
+      }
+      const formData = {
+          firstName,
+          lastName,
+          email,
+          huntingLicenseNumber,
+          password
+      };
 
-        if (!numéropermisdechasser.match(numéropermisdechasserRegex)) {
-            alert("Numéro de permis de chasser invalide");
-            return;
-        }
+      console.log("Sign-Up:", formData);
+  }
+  async function signIn(event?: Event) {
+      if (event) {
+          event.preventDefault();
+      }
 
-        if (!motdepasse.match(motdepasseRegex)) {
-            alert("Mot de passe invalide. Il doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.");
-            return;
-        }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
-        const formData = {
-            nom,
-            prénom,
-            email,
-            numéropermisdechasser,
-            motdepasse
-        };
-        // Vous pouvez maintenant envoyer formData à votre backend pour la logique d'inscription
-        console.log("Inscription:", formData);
-    }
+      if (!loginEmail.match(emailRegex)) {
+          alert("Invalid login email");
+          return;
+      }
 
-    async function connexion(event?: Event) {
-        if (event) {
-            event.preventDefault();
-        }
+      if (!loginPassword.match(passwordRegex)) {
+          alert("Invalid login password. It must contain at least 8 characters, one uppercase letter, one lowercase letter, and one digit.");
+          return;
+      }
 
-        // Validation des données avec des regex
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const motdepasseRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+      const formData = {
+          loginEmail,
+          loginPassword
+      };
 
-        if (!emailConnexion.match(emailRegex)) {
-            alert("Email de connexion invalide");
-            return;
-        }
-
-        if (!motdepasseConnexion.match(motdepasseRegex)) {
-            alert("Mot de passe de connexion invalide. Il doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.");
-            return;
-        }
-
-        const formData = {
-            emailConnexion,
-            motdepasseConnexion
-        };
-        // Vous pouvez maintenant envoyer formData à votre backend pour la logique de connexion
-        console.log("Connexion:", formData);
-    }
+      console.log("Sign-In:", formData);
+  }
 </script>
-  
-  <style>
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f0f2f5;
-      font-family: Arial, sans-serif;
-    }
-  
-    #inscription, #connexion {
-      background-color: white;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin: 10px;
-      width: 90%;
-      max-width: 300px;
-    }
-  
-    h2 {
-      color: #d67b03;
-      margin-bottom: 20px;
-    }
-  
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-    }
-  
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #d67b03;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  
-    button:hover {
-      background-color: #d67b03;
-    }
-  </style>
-  
-  <div class="container">
-    <div id="inscription">
-      <h2>Inscription</h2>
-      <form on:submit={inscription}>
-        <input type="text" bind:value={nom} placeholder="Nom" required>
-        <input type="text" bind:value={prénom} placeholder="Prénom" required>
-        <input type="email" bind:value={email} placeholder="Email" required>
-        <input type="text" bind:value={numéropermisdechasser} placeholder="Numéro de permis de chasser" required>
-        <input type="password" bind:value={motdepasse} placeholder="Mot de passe" required>
-        <button type="submit">Inscription</button>
-      </form>
-    </div>
-  
-    <div id="connexion">
-      <h2>Connexion</h2>
-      <form on:submit={connexion}>
-        <input type="email" bind:value={emailConnexion} placeholder="Email" required>
-        <input type="password" bind:value={motdepasseConnexion} placeholder="Mot de passe" required>
-        <button type="submit">Connexion</button>
-      </form>
-    </div>
-  </div>
-  
