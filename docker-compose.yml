@@ -1,6 +1,24 @@
-version: '3'
+version: '3.8'
+
 services:
-  web:
-    build: .
+  frontend:
+    build: ./frontend
     ports:
-      - "8080:80"
+      - "3000:5173"
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: hunters
+      POSTGRES_USER: hunters
+      POSTGRES_PASSWORD: super
+    ports:
+      - "5433:5432"
