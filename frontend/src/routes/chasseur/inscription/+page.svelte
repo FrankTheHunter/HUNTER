@@ -1,16 +1,15 @@
 <script lang="ts">
-    import {type RegistrationDto, registerApi } from '$lib/api/authentication';
-    const formData: RegistrationDto = {
-        name: '',
-        firstName: '',
-        email: '',
-        password: '',
-        loginEmail: '',
-        huntingLicenseNumber: '',
-        loginPassword: ''
+	import { registerApi, type RegistrationOptions } from '$lib/api/authentication';
+    const formData: RegistrationOptions = {
+        lastName: 'plop',
+        firstName: 'plop',
+        email: 'plop@plop.fr',
+        password: 'aze',
+        huntingLicenseNumber: '1234567890123',
     }
 
 	async function register(event?: Event) {
+		console.log(formData)
 		if (event) {
 			event.preventDefault();
 		}
@@ -19,10 +18,10 @@
 		const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]{2,}$/;
 		const firstNameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s-]{2,}$/;
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		const huntingLicenseNumberRegex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+		const huntingLicenseNumberRegex = /^\d{13}$/;
 		const passwordRegex = /.*/; // TODO find a good regexp
 
-		if (!formData.name.match(nameRegex)) {
+		if (!formData.lastName.match(nameRegex)) {
 			alert('Invalid name');
 			return;
 		}
@@ -57,7 +56,7 @@
 	<div id="registration">
 		<h2>Registration</h2>
 		<form on:submit|preventDefault={register}>
-			<input type="text" bind:value={formData.name} placeholder="Name" required />
+			<input type="text" bind:value={formData.lastName} placeholder="Name" required />
 			<input type="text" bind:value={formData.firstName} placeholder="First Name" required />
 			<input type="email" bind:value={formData.email} placeholder="Email" required />
 			<input
