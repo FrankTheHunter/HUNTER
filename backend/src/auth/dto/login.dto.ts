@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator'; // Import des décorateurs de class-validator
 
 // Définition du DTO (Data Transfer Object) pour la connexion
 export class LoginDto {

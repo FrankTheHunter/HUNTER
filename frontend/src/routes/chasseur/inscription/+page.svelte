@@ -22,7 +22,7 @@
 		const passwordRegex = /.*/; // TODO find a good regexp
 
 		if (!formData.lastName.match(nameRegex)) {
-			alert('Invalid name');
+			alert('Invalid last name');
 			return;
 		}
 
@@ -56,7 +56,7 @@
 	<div id="registration">
 		<h2>Registration</h2>
 		<form on:submit|preventDefault={register}>
-			<input type="text" bind:value={formData.lastName} placeholder="Name" required />
+			<input type="text" bind:value={formData.lastName} placeholder="Last Name" required />
 			<input type="text" bind:value={formData.firstName} placeholder="First Name" required />
 			<input type="email" bind:value={formData.email} placeholder="Email" required />
 			<input
