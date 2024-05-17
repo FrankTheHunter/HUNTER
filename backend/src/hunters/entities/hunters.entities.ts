@@ -16,7 +16,8 @@ export class Hunters {
   // Adresse email de l'utilisateur, unique dans la base de données
   @Column({ name: 'email_address' })
   email: string;
-  huntersname: any;
-  creationDate: any;
-  password: any;
+  
+  // Mot de passe de l'utilisateur
+  @Column({ name: 'password', type: 'varchar' })
+  password: string;
 }

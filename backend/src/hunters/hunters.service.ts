@@ -18,7 +18,6 @@ export class HuntersService {
     hunters = new Hunters();
     hunters.email = createhuntersDto.emailAddress;
     hunters.password = createhuntersDto.password;
-    hunters.creationDate = new Date();
 
     await this.huntersRepository.save(hunters);
     return hunters;

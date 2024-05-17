@@ -13,6 +13,7 @@ CREATE TABLE hunters_registered (
    lastname VARCHAR(100) NOT NULL,
    firstname VARCHAR(100) NOT NULL,
    email_address VARCHAR(60) NOT NULL,
+   password VARCHAR(50) NOT NULL,
    CONSTRAINT hunters_registered_pk PRIMARY KEY(id),
    CONSTRAINT hunters_registered_license_unique UNIQUE(license_number)
 );

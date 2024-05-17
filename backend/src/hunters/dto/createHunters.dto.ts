@@ -11,7 +11,7 @@ export class CreateHuntersDto {
 
   @IsNotEmpty()
   @IsEmail({}, { message: 'Please provide a valid email address.' })
-  emailAddress: string;
+  email: string;
 
   @IsNotEmpty()
   @Matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
@@ -19,4 +19,5 @@ export class CreateHuntersDto {
       'Password must be at least 8 characters long and contain at least one letter and one number.',
   })
   password: string;
+  emailAddress: string;
 }
