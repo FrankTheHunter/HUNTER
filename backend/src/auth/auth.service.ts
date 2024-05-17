@@ -21,7 +21,7 @@ export class AuthService { // Définition de la classe AuthService
     private huntersModel: Model<any>, // Injection du modèle utilisateur
   ) {}
 
-  async register(payload: RegisterDto) { // Définition de la méthode d'inscription
+ /*  async register(payload: RegisterDto) { // Définition de la méthode d'inscription
     const { huntersname, creationDate, email, password } = payload; // Extraction des données du payload
     const hunters = await this.huntersService.create({ // Création d'un nouvel utilisateur
       email,
@@ -30,5 +30,5 @@ export class AuthService { // Définition de la classe AuthService
       creationDate,
     });
     return hunters; // Retourne l'utilisateur créé
-  }
+  } */
 }

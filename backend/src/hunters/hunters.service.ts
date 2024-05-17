@@ -3,12 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Hunters } from '../hunters/entities/hunters.entities';
 import { Repository } from 'typeorm';
 import { CreateHuntersDto } from './dto/createHunters.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class HuntersService {
-  async create(arg0: { email: string; password: string; huntersname: string; creationDate: Date; }) {
-    throw new Error('Method not implemented.');
-  }
   constructor(
     @InjectRepository(Hunters) private readonly huntersRepository: Repository<Hunters>,
   ) {}
@@ -16,17 +14,25 @@ export class HuntersService {
   async createhunters(createhuntersDto: CreateHuntersDto) {
     let hunters: Hunters; // Declare the variable 'hunters' with the type 'Hunters'.
     hunters = new Hunters();
-    hunters.email = createhuntersDto.emailAddress;
-    hunters.password = createhuntersDto.password;
+    hunters.licenseNumber = createhuntersDto.licenseNumber;
+    hunters.firstname = createhuntersDto.firstname;
+    hunters.lastname = createhuntersDto.lastname;
+    hunters.email = createhuntersDto.email;
+    const rawPassword = createhuntersDto.password;
+    const salt = await bcrypt.genSalt(10); // Generate a random salt.
+    const hashedPassword = await bcrypt.hash(rawPassword, salt); // Use the salt to hash the password.
+    hunters.password = hashedPassword;
 
     await this.huntersRepository.save(hunters);
     return hunters;
   }
 
-  async findOneByEmail(email: string): Promise<Hunters | null> {
-    console.log(email);
+  async validateUser(email: string, password: string): Promise<boolean> {
     const hunters = await this.huntersRepository.findOne({ where: { email } });
-
-    return hunters;
+    if (hunters && hunters.password) {
+      const isMatch = await bcrypt.compare(password, hunters.password);
+      return isMatch;
+    }
+    return false;
   }
 }

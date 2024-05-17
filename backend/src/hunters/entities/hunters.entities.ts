@@ -5,6 +5,10 @@ export class Hunters {
   // Identifiant unique auto-incrémenté de l'utilisateur
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ name: 'license_number' })
+  licenseNumber: string;
+
   // prenom de l'utilisateur
   @Column({ name: 'lastname' })
   lastname: string;
