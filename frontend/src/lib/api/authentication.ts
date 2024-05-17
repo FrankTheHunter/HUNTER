@@ -1,4 +1,4 @@
-export interface hunter {
+/* export interface hunter {
 	email: string;
 	password: string;
 	firstName: string;
@@ -61,3 +61,4 @@ export const loginApi = async (loginData: { email: string, password: string }) =
         throw error;
     }
 }
+ */
