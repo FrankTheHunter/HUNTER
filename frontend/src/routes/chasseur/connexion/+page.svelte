@@ -1,6 +1,6 @@
 <script lang="ts">
 
-    import { loginApi } from '$lib/api/authentication';
+    // import { loginApi } from '$lib/api/authentication'; // Missing import
 const loginFormData = {email: '', password: ''};
 
     async function login(event?: Event) {
@@ -23,6 +23,11 @@ const loginFormData = {email: '', password: ''};
 
         loginApi(loginFormData);
     }
+
+
+	function loginApi(loginFormData: { email: string; password: string; }) {
+		throw new Error("Function not implemented.");
+	}
 </script>
 
 <div class="container">

@@ -7,10 +7,12 @@ import {
   Res, // Décorateur pour injecter l'objet de réponse HTTP
 } from '@nestjs/common';
 import { Response } from 'express'; // Importation de l'objet de réponse Express
-import { AuthService } from './auth.service'; // Importation du service d'authentification
+// Remove the duplicate import statement for 'CreateHuntersDto'
 import { Public } from './public_strategy'; // Importation du décorateur pour les routes publiques
 import { LoginDto } from './dto/login.dto'; // Importation du DTO pour la connexion
 import { RegisterDto } from './dto/register.dto'; // Importation du DTO pour l'enregistrement
+import { CreateHuntersDto } from 'src/hunters/dto/createHunters.dto';
+import { AuthService } from './auth.service';
 
 @Controller('auth') // Définition du chemin de base pour les routes de ce contrôleur
 export class AuthController {
@@ -18,10 +20,9 @@ export class AuthController {
 
   @Public() // Décorateur pour définir cette route comme publique (accessible sans authentification)
   @HttpCode(HttpStatus.OK) // Définition du code de statut HTTP pour cette route
-  @Post('register') // Définition de la route POST pour l'enregistrement des utilisateurs
-  async register(@Body() registerData: RegisterDto) {
-    console.log(registerData); // Affichage des données d'enregistrement reçues dans la console
-    return registerData; // Retourne les données d'enregistrement reçues
+  @Post('/register') // Définition de la route POST pour l'enregistrement des utilisateurs
+  async createHunter(registerData: RegisterDto) {
+    // Logic to create a new hunter
   }
 
   @Public() // Décorateur pour définir cette route comme publique (accessible sans authentification)

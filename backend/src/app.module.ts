@@ -25,7 +25,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       logging: true,
     }),
     DatabaseModule,
-    HuntersModule], // Importation des modules supplémentaires utilisés par l'application (connexion à la base de données, authentification)
+    HuntersModule
+  ], // Importation des modules supplémentaires utilisés par l'application (connexion à la base de données, authentification)
   controllers: [AppController], // Déclaration des contrôleurs utilisés par l'application
   providers: [AppService], // Déclaration des services utilisés par l'application
 })
