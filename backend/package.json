@@ -23,9 +23,16 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/jwt": "^10.2.0",
+<<<<<<< HEAD
     "@nestjs/platform-express": "^10.0.0",
+=======
+    "@nestjs/mongoose": "^10.0.6",
+    "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/typeorm": "^10.0.2",
+>>>>>>> 3130ac3263d985a9860438a64dd8618915eb6009
     "class-validator": "^0.14.1",
     "kysely": "^0.27.3",
+    "mongoose": "^8.3.3",
     "pg": "^8.11.5",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
