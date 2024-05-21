@@ -1,13 +1,12 @@
-import { Controller, Get } from '@nestjs/common'; // Importation des décorateurs Controller et Get de Nest.js
-import { AppService } from './app.service'; // Importation du service AppService
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
 
-@Controller() // Décorateur pour marquer la classe comme contrôleur
+@Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {} // Injection du service AppService via le constructeur
+  constructor(private readonly appService: AppService) {}
 
-  @Get() // Décorateur pour définir la route HTTP GET associée à cette méthode
+  @Get()
   getHello(): string {
-    // Méthode qui gère les requêtes GET sur la route racine de l'application
-    return 'test'; // Renvoie une réponse avec la chaîne "test"
+    return this.appService.getHello();
   }
 }

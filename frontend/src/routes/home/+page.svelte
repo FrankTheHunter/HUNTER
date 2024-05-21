@@ -7,7 +7,7 @@
   <a href="./promeneur/"> 
       <div class="btn1">PROMENEUR</div>
   </a>
-  <a href="./chasseur/inscription/">
+  <a href="./chasseur/">
     <div class="btn2">CHASSEUR</div>
     
   </a>
