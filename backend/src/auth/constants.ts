@@ -1,3 +1,3 @@
 export const jwtConstants = {
-  secret: 'JWTSecret#@!',
+  secret: 'JWTSecret#@!', // Clé secrète pour les jetons JWT
 };
