@@ -141,13 +141,6 @@
 <div class="main">
 	<div class="form-container">
 		<form on:submit|preventDefault={postForm}>
-			<label for="firstname">Prénom :</label>
-			<input
-				type="text"
-				id="firstname"
-				bind:value={formData.firstname}
-				title="Le prénom doit contenir entre 2 et 30 caractères alphabétiques."
-			/>
 
 			<label for="lastname">Nom :</label>
 			<input
@@ -155,6 +148,14 @@
 				id="lastname"
 				bind:value={formData.lastname}
 				title="Le nom doit contenir entre 2 et 30 caractères alphabétiques."
+			/>
+
+			<label for="firstname">Prénom :</label>
+			<input
+				type="text"
+				id="firstname"
+				bind:value={formData.firstname}
+				title="Le prénom doit contenir entre 2 et 30 caractères alphabétiques."
 			/>
 
 			<label for="email">Email :</label>
@@ -179,14 +180,6 @@
 				id="passwordValidation"
 				bind:value={formData.passwordValidation}
 				title="Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre."
-			/>
-
-			<label for="licenseNumber">N° de SIRET :</label>
-			<input
-				type="text"
-				id="licenseNumber"
-				bind:value={formData.licenseNumber}
-				title="Le numéro de licence doit être composé de 14 chiffres."
 			/>
 
 			{#if showErrors && errorMessages.length > 0}
