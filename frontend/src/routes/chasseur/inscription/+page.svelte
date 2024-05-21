@@ -81,72 +81,79 @@
  <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	
 	import { fetchData } from '$lib/utils';
 
 	let errorMessages: string[] = [];
 	let showErrors = false;
 
-	
+	interface FormData {
+		licenseNumber: string;
+		firstname: string;
+		lastname: string;
+		email: string;
+		password: string;
+		passwordValidation: string;
+	}
+
+	let formData: FormData = {
+		licenseNumber: '',
+		firstname: '',
+		lastname: '',
+		email: '',
+		password: '',
+		passwordValidation: ''
+	};
 
 	const postForm = async () => {
-		
+		// Clear previous errors
+		errorMessages = [];
+
 		// Check password match
 		if (formData.password !== formData.passwordValidation) {
 			errorMessages.push('Les mots de passe ne correspondent pas.');
 		}
 
+		if (errorMessages.length > 0) {
+			showErrors = true;
+			return;
+		}
+
 		try {
 			const data = await fetchData('POST', formData);
-			// Send if connected in local storage for icon display
-			console.log('data :' + data);
+			console.log('data:', data);
 			// Redirect to login page
 			goto('/chasseur/connexion');
 		} catch (error) {
 			showErrors = true;
-			const message:any = (error as any).cause;
+			const message = (error as Error).message || 'Une erreur est survenue';
 			errorMessages.push(message);
 		}
 	};
 
-	// Form data object
-	let formData = {
-		licenseNumber: '',
-		firstname: '',
-        lastname: '',
-		email: '',
-		password: '',
-		passwordValidation: ''
-		
-	};
-	console.log('formData :' + formData);
-	// On component mount, check if there are errors to show
 	onMount(() => {
 		if (errorMessages.length > 0) {
 			showErrors = true;
 		}
-		console.log('errorMessages :' + formData);
+		console.log('Component mounted, formData:', formData);
 	});
-
-	
 </script>
 
 <div class="main">
 	<div class="form-container">
 		<form on:submit|preventDefault={postForm}>
-			<label for="lastName">Prénom :</label>
-			<input
-				type="text"
-				id="lastName"
-				bind:value={formData.lastname}
-				title="Le prénom doit contenir entre 2 et 30 caractères alphabétiques."
-			/>
-
-			<label for="firstName">Nom :</label>
+			<label for="firstname">Prénom :</label>
 			<input
 				type="text"
 				id="firstname"
 				bind:value={formData.firstname}
+				title="Le prénom doit contenir entre 2 et 30 caractères alphabétiques."
+			/>
+
+			<label for="lastname">Nom :</label>
+			<input
+				type="text"
+				id="lastname"
+				bind:value={formData.lastname}
 				title="Le nom doit contenir entre 2 et 30 caractères alphabétiques."
 			/>
 
@@ -158,35 +165,28 @@
 				title="Entrez une adresse email valide."
 			/>
 
-			<label for="password"> Mot de passe :</label>
-
-			<div class="password">
-				<input
-					type="password"
-					id="password"
-					bind:value={formData.password}
-					title="Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre."
-				/>
-				
-			</div>
+			<label for="password">Mot de passe :</label>
+			<input
+				type="password"
+				id="password"
+				bind:value={formData.password}
+				title="Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre."
+			/>
 
 			<label for="passwordValidation">Confirmation mot de passe :</label>
-			<div class="password">
-				<input
-					type="password"
-					id="passwordValidation"
-					bind:value={formData.passwordValidation}
-					title="Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre."
-				/>
-				
-			</div>
+			<input
+				type="password"
+				id="passwordValidation"
+				bind:value={formData.passwordValidation}
+				title="Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre."
+			/>
 
-			<label for="siret"> N° de SIRET :</label>
+			<label for="licenseNumber">N° de SIRET :</label>
 			<input
 				type="text"
 				id="licenseNumber"
 				bind:value={formData.licenseNumber}
-				title="Le numéro de liscence doit être composé de 14 chiffres."
+				title="Le numéro de licence doit être composé de 14 chiffres."
 			/>
 
 			{#if showErrors && errorMessages.length > 0}
@@ -197,10 +197,76 @@
 				</div>
 			{/if}
 
-			<button class="submit" type="submit"> Soumettre </button>
+			<button class="submit" type="submit">Soumettre</button>
 			<div class="login">
 				<a href="/chasseur/connexion"><p>Vous avez déjà un compte?</p></a>
 			</div>
 		</form>
 	</div>
 </div>
+
+<style>
+	.main {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		background-color: #f0f2f5;
+		font-family: Arial, sans-serif;
+	}
+
+	.form-container {
+		background-color: white;
+		padding: 20px;
+		border-radius: 5px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		width: 90%;
+		max-width: 400px;
+	}
+
+	label {
+		display: block;
+		margin-bottom: 5px;
+	}
+
+	input {
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 10px;
+		border-radius: 5px;
+		border: 1px solid #ddd;
+	}
+
+	button {
+		width: 100%;
+		padding: 10px;
+		background-color: #d67b03;
+		color: white;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	button:hover {
+		background-color: #bf6a03;
+	}
+
+	.error-container {
+		margin-bottom: 10px;
+	}
+
+	.error {
+		color: red;
+		margin: 5px 0;
+	}
+
+	.login {
+		text-align: center;
+		margin-top: 10px;
+	}
+
+	.login a {
+		color: #d67b03;
+		text-decoration: none;
+	}
+</style>
