@@ -22,6 +22,6 @@ export class Hunters {
   email: string;
   
   // Mot de passe de l'utilisateur
-  @Column({ name: 'password' })
+  @Column({ name: 'password', type: 'varchar' })
   password: string;
 }
