@@ -6,6 +6,7 @@
   let loginEmail = '';
   let huntingLicenseNumber = '';
   let loginPassword = '';
+  
   async function signUp(event?: Event) {
       if (event) {
           event.preventDefault();
