@@ -11,7 +11,7 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Origin', 'Authorization'], // Spécification des en-têtes autorisés
     credentials: true, // Activation de la prise en charge des cookies et de l'authentification avec des identifiants
   });
-  await app.listen(3010); // Démarrage de l'application en écoutant sur le port 3010
+  await app.listen(3000); // Démarrage de l'application en écoutant sur le port 3000
 }
 
 bootstrap(); // Appel de la fonction 'bootstrap' pour démarrer l'application

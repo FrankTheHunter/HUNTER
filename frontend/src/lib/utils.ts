@@ -1,5 +1,5 @@
 export async function fetchData( method: string, body?: any) {
-    const URL = 'http://localhost:3010/hunters_registered/register'
+    const URL = 'http://localhost:3000/hunters_registered/register'
    console.log(URL)
     const response = await fetch(`${URL}`, {
         method: method,
