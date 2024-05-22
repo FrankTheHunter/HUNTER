@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HuntersController } from './hunters.controller';
-import { HuntersService } from './hunters/hunters.service';
+import { HuntersService } from '../hunters/hunters.service';
 
 describe('huntersController', () => {
   // Déclaration de la variable pour le contrôleur huntersController
