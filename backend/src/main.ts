@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule); // Création d'une instance de l'application en utilisant le module principal 'AppModule'
   app.enableCors({
     // Configuration de la prise en charge des requêtes CORS (Cross-Origin Resource Sharing)
-    origin: 'http://localhost:5173', // Spécification de l'origine autorisée
+    origin: 'http://localhost:3000', // Spécification de l'origine autorisée
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Spécification des méthodes HTTP autorisées
     allowedHeaders: ['Content-Type', 'Origin', 'Authorization'], // Spécification des en-têtes autorisés
     credentials: true, // Activation de la prise en charge des cookies et de l'authentification avec des identifiants
