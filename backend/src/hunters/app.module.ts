@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'; // Importation du module Nest.js
 
 // Importation des composants de l'application (contrôleur, service, modules supplémentaires)
-import { AppService } from './app.service'; // Service principal de l'application
+import { HuntersService } from './hunters.service'; // Service principal de l'application
 import { DatabaseModule } from '../database/database.module'; // Module pour la connexion à la base de données
 //import { AuthModule } from './auth/auth.module'; // Module pour la gestion de l'authentification
 import { HuntersModule } from './hunters.module'; // Module pour la gestion des utilisateurs
@@ -26,6 +26,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     DatabaseModule,
     HuntersModule,
   ], // Importation des modules supplémentaires utilisés par l'application (connexion à la base de données, authentification)
-  providers: [AppService], // Déclaration des services utilisés par l'application
+  providers: [HuntersService], // Déclaration des services utilisés par l'application
 })
 export class AppModule {} // Définition de la classe AppModule comme module principal de l'application

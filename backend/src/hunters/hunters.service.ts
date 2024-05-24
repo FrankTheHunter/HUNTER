@@ -25,21 +25,24 @@ export class HuntersService {
     const hashedPassword = await bcrypt.hash(rawPassword, salt); // Use the salt to hash the password.
     hunters.password = hashedPassword;
 
-    await this.huntersRepository.save(hunters);
+    await this.huntersRepository.save(hunters); // Save the user to the database.
     return hunters;
   }
 
   async validateUser(email: string, password: string): Promise<boolean> {
-    const hunters = await this.huntersRepository.findOne({ where: { email } });
+    // Change the return type to Promise<boolean>.
+    const hunters = await this.huntersRepository.findOne({ where: { email } }); // Find the user by email.
     if (hunters && hunters.password) {
-      const isMatch = await bcrypt.compare(password, hunters.password);
-      return isMatch;
+      // Check if the user exists and has a password.
+      const isMatch = await bcrypt.compare(password, hunters.password); // Compare the password with the hashed password.
+      return isMatch; // Return the result of the comparison.
     }
     return false;
   }
   async findOneByEmail(email: string): Promise<Hunters | null> {
-    console.log(email);
-    const user = await this.huntersRepository.findOne({ where: { email } });
+    // Change the return type to Promise<Hunters | null>.
+    console.log(email); // Log the email to the console.
+    const user = await this.huntersRepository.findOne({ where: { email } }); // Find the user by email.
 
     return user;
   }

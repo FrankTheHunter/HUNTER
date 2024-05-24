@@ -12,16 +12,23 @@ import { Public } from './public_strategy'; // Importation du décorateur pour l
 import { LoginDto } from './dto/login.dto'; // Importation du DTO pour la connexion
 // Remove the unused import statement for 'RegisterDto'
 import { AuthService } from './auth.service';
+import { HuntersService } from 'src/hunters/hunters.service';
+import { CreateHuntersDto } from 'src/hunters/dto/createHunters.dto';
 
 @Controller('auth') // Définition du chemin de base pour les routes de ce contrôleur
 export class AuthController {
-  constructor(private authService: AuthService) {} // Injection du service d'authentification via le constructeur
+  constructor(
+    private authService: AuthService,
+    private readonly huntersService: HuntersService,
+  ) {} // Injection du service d'authentification via le constructeur
 
   @Public() // Décorateur pour définir cette route comme publique (accessible sans authentification)
-  @HttpCode(HttpStatus.OK) // Définition du code de statut HTTP pour cette route
+  @HttpCode(HttpStatus.CREATED) // Définition du code de statut HTTP pour cette route
   @Post('/register') // Définition de la route POST pour l'enregistrement des utilisateurs
-  async createHunter() {
+  async createHunter(@Body() register: CreateHuntersDto) {
     // Logic to create a new hunter
+    await this.huntersService.createhunters(register);
+    return { message: 'Hunters crées avec succées ' };
   }
 
   @Public() // Décorateur pour définir cette route comme publique (accessible sans authentification)
