@@ -5,7 +5,7 @@ import { HuntersService } from '../hunters/hunters.service';
 @Injectable() // Décorateur Injectable pour définir le service comme injectable
 export class AuthService {
   // Définition de la classe AuthService
-  signIn(email: string, password: string) {
+  signIn() {
     // Définition de la méthode de connexion
   }
   constructor(

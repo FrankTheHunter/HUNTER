@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common'; // Importation des décorateurs Controller et Get de Nest.js
+import { Controller } from '@nestjs/common'; // Importation du décorateur Controller de Nest.js
 
 @Controller() // Décorateur pour marquer la classe comme contrôleur
 export class AppController {}

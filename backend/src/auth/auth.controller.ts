@@ -10,7 +10,7 @@ import { Response } from 'express'; // Importation de l'objet de réponse Expres
 // Remove the duplicate import statement for 'CreateHuntersDto'
 import { Public } from './public_strategy'; // Importation du décorateur pour les routes publiques
 import { LoginDto } from './dto/login.dto'; // Importation du DTO pour la connexion
-import { RegisterDto } from './dto/register.dto'; // Importation du DTO pour l'enregistrement
+// Remove the unused import statement for 'RegisterDto'
 import { AuthService } from './auth.service';
 
 @Controller('auth') // Définition du chemin de base pour les routes de ce contrôleur
@@ -20,7 +20,7 @@ export class AuthController {
   @Public() // Décorateur pour définir cette route comme publique (accessible sans authentification)
   @HttpCode(HttpStatus.OK) // Définition du code de statut HTTP pour cette route
   @Post('/register') // Définition de la route POST pour l'enregistrement des utilisateurs
-  async createHunter(registerData: RegisterDto) {
+  async createHunter() {
     // Logic to create a new hunter
   }
 
@@ -31,11 +31,7 @@ export class AuthController {
     @Body() signInDto: LoginDto, // Paramètre de requête pour les données de connexion
     @Res({ passthrough: true }) response: Response, // Injection de l'objet de réponse HTTP
   ) {
-    const token = await this.authService.signIn(
-      // Appel au service d'authentification pour générer le jeton d'authentification
-      signInDto.email, // Email de l'utilisateur
-      signInDto.password, // Mot de passe de l'utilisateur
-    );
+    const token = await this.authService.signIn();
     console.log(token); // Affichage du jeton d'authentification généré dans la console
 
     // Configuration du cookie JWT dans la réponse HTTP
