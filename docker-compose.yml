@@ -22,7 +22,7 @@ services:
     image: postgres:latest
     restart: always
     volumes: 
-      - ./data/sql/init.ddl.sql:/docker-entrypoint-initdb.d/init.ddl.sql
+      - ./database/database/schema.ddl.sql:/docker-entrypoint-initdb.d/init.ddl.sql
     environment:
       POSTGRES_DB: hunters
       POSTGRES_USER: hunters
