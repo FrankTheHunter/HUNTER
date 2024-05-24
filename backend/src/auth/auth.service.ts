@@ -13,7 +13,8 @@ interface RegisterDto { // Définition de l'interface RegisterDto
 @Injectable() // Décorateur Injectable pour définir le service comme injectable
 export class AuthService { // Définition de la classe AuthService
   signIn(email: string, password: string) { // Définition de la méthode de connexion
-    throw new Error('Method not implemented.'); // Implémenter la méthode de connexion
+
+
   }
   constructor( // Injection des dépendances requises pour le service d'authentification
     private huntersService: HuntersService, // Injection du service utilisateur
