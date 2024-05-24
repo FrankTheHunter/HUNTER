@@ -13,7 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   // Déclaration du module principal de l'application
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: 'postgres', // Type de base de données utilisé
       host: 'database',
       port: 5432,
       username: 'hunters',
