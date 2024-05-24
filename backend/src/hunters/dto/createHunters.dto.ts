@@ -1,7 +1,6 @@
 import { IsEmail, IsNotEmpty, Matches, MinLength } from 'class-validator';
 
 export class CreateHuntersDto {
-
   @IsNotEmpty()
   licenseNumber: string;
 
@@ -23,5 +22,4 @@ export class CreateHuntersDto {
       'Password must be at least 8 characters long and contain at least one letter and one number.',
   })
   password: string;
-
 }

@@ -1,4 +1,4 @@
-export async function fetchData( method: string, body?: any) {
+export async function fetchData( method: string, body?: unknown) {
     const URL = 'http://localhost:8080/hunters_registered/register'
    console.log(URL)
     const response = await fetch(`${URL}`, {

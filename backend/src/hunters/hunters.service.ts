@@ -8,11 +8,13 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class HuntersService {
   constructor(
-    @InjectRepository(Hunters) private readonly huntersRepository: Repository<Hunters>,
+    @InjectRepository(Hunters)
+    private readonly huntersRepository: Repository<Hunters>,
   ) {}
 
   async createhunters(createhuntersDto: CreateHuntersDto) {
     let hunters: Hunters; // Declare the variable 'hunters' with the type 'Hunters'.
+    // eslint-disable-next-line prefer-const
     hunters = new Hunters();
     hunters.licenseNumber = createhuntersDto.licenseNumber;
     hunters.firstname = createhuntersDto.firstname;
@@ -34,5 +36,11 @@ export class HuntersService {
       return isMatch;
     }
     return false;
+  }
+  async findOneByEmail(email: string): Promise<Hunters | null> {
+    console.log(email);
+    const user = await this.huntersRepository.findOne({ where: { email } });
+
+    return user;
   }
 }

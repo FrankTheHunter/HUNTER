@@ -11,7 +11,6 @@ import { Response } from 'express'; // Importation de l'objet de réponse Expres
 import { Public } from './public_strategy'; // Importation du décorateur pour les routes publiques
 import { LoginDto } from './dto/login.dto'; // Importation du DTO pour la connexion
 import { RegisterDto } from './dto/register.dto'; // Importation du DTO pour l'enregistrement
-import { CreateHuntersDto } from 'src/hunters/dto/createHunters.dto';
 import { AuthService } from './auth.service';
 
 @Controller('auth') // Définition du chemin de base pour les routes de ce contrôleur
