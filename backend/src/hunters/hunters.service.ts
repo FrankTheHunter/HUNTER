@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Hunters } from '../hunters/entities/hunters.entities';
 import { Repository } from 'typeorm';
@@ -12,38 +12,41 @@ export class HuntersService {
     private readonly huntersRepository: Repository<Hunters>,
   ) {}
 
-  async createhunters(createhuntersDto: CreateHuntersDto) {
-    let hunters: Hunters; // Declare the variable 'hunters' with the type 'Hunters'.
-    // eslint-disable-next-line prefer-const
-    hunters = new Hunters();
+  async createhunters(createhuntersDto: CreateHuntersDto): Promise<Hunters> {
+    const hunters = new Hunters();
     hunters.licenseNumber = createhuntersDto.licenseNumber;
     hunters.firstname = createhuntersDto.firstname;
     hunters.lastname = createhuntersDto.lastname;
     hunters.email = createhuntersDto.email;
     const rawPassword = createhuntersDto.password;
-    const salt = await bcrypt.genSalt(10); // Generate a random salt.
-    const hashedPassword = await bcrypt.hash(rawPassword, salt); // Use the salt to hash the password.
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(rawPassword, salt);
     hunters.password = hashedPassword;
 
-    await this.huntersRepository.save(hunters); // Save the user to the database.
+    await this.huntersRepository.save(hunters);
     return hunters;
   }
 
   async validateUser(email: string, password: string): Promise<boolean> {
-    // Change the return type to Promise<boolean>.
-    const hunters = await this.huntersRepository.findOne({ where: { email } }); // Find the user by email.
+    const hunters = await this.huntersRepository.findOne({ where: { email } });
     if (hunters && hunters.password) {
-      // Check if the user exists and has a password.
-      const isMatch = await bcrypt.compare(password, hunters.password); // Compare the password with the hashed password.
-      return isMatch; // Return the result of the comparison.
+      const isMatch = await bcrypt.compare(password, hunters.password);
+      return isMatch;
     }
     return false;
   }
-  async findOneByEmail(email: string): Promise<Hunters | null> {
-    // Change the return type to Promise<Hunters | null>.
-    console.log(email); // Log the email to the console.
-    const user = await this.huntersRepository.findOne({ where: { email } }); // Find the user by email.
 
-    return user;
+  async findOneByEmail(email: string): Promise<Hunters | null> {
+    try {
+      const user = await this.huntersRepository.findOne({ where: { email } });
+
+      if (!user) {
+        throw new UnauthorizedException('Incorrect email or password.');
+      }
+
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 }
