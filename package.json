@@ -6,9 +6,11 @@
     "@sveltejs/adapter-auto": "^3.2.1",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.3",
+    "pg": "^8.11.5",
     "preprocess": "^3.2.0",
     "svelte-preprocess": "^5.1.4"
   },
