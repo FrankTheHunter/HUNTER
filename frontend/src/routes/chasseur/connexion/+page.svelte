@@ -32,7 +32,7 @@
     }
 
     async function loginApi(loginFormData: { email: string; password: string; }) { // Define the loginApi function
-        const response = await fetch('/api/login', { // Send a POST request to the /api/login endpoint
+        const response = await fetch('http://localhost:8080/auth/login', { // Send a POST request to the /api/login endpoint
             method: 'POST', // Use the POST method
             headers: { // Set the request headers
                 'Content-Type': 'application/json' // Send the request body as JSON
