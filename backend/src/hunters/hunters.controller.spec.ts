@@ -1,24 +1,49 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HuntersController } from './hunters.controller';
-import { HuntersService } from '../hunters/hunters.service';
+import { HuntersService } from './hunters.service';
+import { INestApplication } from '@nestjs/common';
+import * as request from 'supertest';
+import { afterEach, beforeEach, describe, it } from 'node:test';
+import { jest } from '@jest/globals';
 
-describe('huntersController', () => {
-  // Déclaration de la variable pour le contrôleur huntersController
-  let controller: HuntersController;
+describe('HuntersController', () => {
+  let app: INestApplication;
+  let huntersService = { createhunters: jest.fn(), validateUser: jest.fn() };
 
   beforeEach(async () => {
-    // Configuration des tests avec un nouveau module de test
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [HuntersController], // Contrôleur à tester
-      providers: [HuntersService], // Service nécessaire au contrôleur
-    }).compile(); // Compilation du module de test
+    const moduleRef: TestingModule = await Test.createTestingModule({
+      controllers: [HuntersController],
+      providers: [
+        {
+          provide: HuntersService,
+          useValue: huntersService,
+        },
+      ],
+    }).compile();
 
-    // Récupération du contrôleur huntersController depuis le module
-    controller = module.get<HuntersController>(HuntersController);
+    app = moduleRef.createNestApplication();
+    await app.init();
   });
 
-  // Test : Vérifie si le contrôleur est défini
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  it('/POST register', () => {
+    const dto = { email: 'test@test.com', password: 'password' };
+    return request(app.getHttpServer())
+      .post('/hunters_registered/register')
+      .send(dto)
+      .expect(201)
+      .expect({ message: 'Hunters crées avec succées ' });
+  });
+
+  it('/POST login', () => {
+    const dto = { email: 'test@test.com', password: 'password' };
+    huntersService.validateUser.mockResolvedValue(dto as never);
+    return request(app.getHttpServer())
+      .post('/hunters_registered/login')
+      .send(dto)
+      .expect(200);
+  });
+
+  afterEach(async () => {
+    await app.close();
   });
 });
