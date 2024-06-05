@@ -38,7 +38,7 @@ export class AuthController {
     @Body() signInDto: LoginDto, // Paramètre de requête pour les données de connexion
     @Res({ passthrough: true }) response: Response, // Injection de l'objet de réponse HTTP
   ) {
-    const token = await this.authService.signIn();
+    const token = await this.authService.signIn(signInDto);
     console.log(token); // Affichage du jeton d'authentification généré dans la console
 
     // Configuration du cookie JWT dans la réponse HTTP

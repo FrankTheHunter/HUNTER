@@ -85,6 +85,14 @@
 				title="Entrez une adresse email valide."
 			/>
 
+			<label for="licenseNumber">licenseNumber :</label>
+			<input
+				type="text"
+				id="licenseNumber"
+				bind:value={formData.licenseNumber}
+				title="Le nom doit contenir 12 caractères alphabétiques."
+			/>
+
 			<label for="password">Mot de passe :</label>
 			<input
 				type="password"

@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common'; // Importation du module Injectable de Nest.js
 import { JwtService } from '@nestjs/jwt'; // Importation du service JWT de Nest.js
 import { HuntersService } from '../hunters/hunters.service';
-
+import { LoginDto } from './dto/login.dto'; // Importation du DTO pour la connexion
 @Injectable() // Décorateur Injectable pour définir le service comme injectable
 export class AuthService {
   // Définition de la classe AuthService
-  signIn() {
+  async signIn(signInDto: LoginDto) {
+
+    return 'token';
     // Définition de la méthode de connexion
   }
   constructor(
